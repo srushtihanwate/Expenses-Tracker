@@ -1,0 +1,173 @@
+/* General Styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: #f8f9fa; /* Light grey background */
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;  /* Added padding to avoid compact look */
+}
+
+/* Container - Increased Spacing */
+.container {
+    width: 90%;
+    max-width: 700px; /* Increased max width for more space */
+    background: white;
+    padding: 30px; /* Increased padding */
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* More depth */
+    margin-bottom: 20px; /* Added margin for spacing */
+}
+
+/* Headings - More Space */
+h1, h2 {
+    text-align: center;
+    color: #444;
+    margin-bottom: 15px; /* Added spacing below headings */
+}
+
+/* Form Styling - Spaced Out */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* More gap between inputs */
+    padding: 10px 0;
+}
+
+label {
+    font-weight: 600;
+}
+
+/* Inputs and Dropdowns - Bigger & More Padding */
+input, select, button {
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 16px;
+}
+
+/* Buttons - More Spacing & Rounded */
+button {
+    background-color: #0056b3;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+    font-size: 16px;
+    padding: 12px;
+    border-radius: 6px;
+}
+
+button:hover {
+    background-color: #0056b3;
+    transform: scale(1.02); /* Slight scale effect */
+}
+
+/* Section Titles - More Separation */
+section {
+    margin-top: 25px;
+    padding: 15px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Expense List - More Space */
+ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 10px; /* Space above the list */
+}
+
+ul li {
+    background: #f9f9f9;
+    padding: 12px;
+    margin: 8px 0;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Authentication Forms - More Space */
+.auth-container {
+    width: 450px; /* Increased width for better spacing */
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    margin-top: 30px;
+}
+
+.auth-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.auth-container button {
+    background-color: #28a745;
+}
+
+.auth-container button:hover {
+    background-color: #218838;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container, .auth-container {
+        width: 100%;
+        padding: 20px;
+    }
+
+    ul li {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+#addCategorySection {
+    margin-top: 30px;  /* Adds more space below the Add Category section */
+}
+
+
+ .button-container {
+    display: flex;
+    justify-content: center; /* Centers buttons */
+    gap: 15px; /* Space between buttons */
+    margin-top: 20px;
+}
+
+#logoutBtn, #dashboardBtn {
+    display: block;
+    width: 100%;
+    max-width: 200px;
+    margin: 30px auto; /* Adds space and centers it */
+    padding: 12px;
+    background-color: #0056b3;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+
+#logoutBtn:hover {
+    background-color: #0056b3;
+}
+
+#dashboardBtn:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}

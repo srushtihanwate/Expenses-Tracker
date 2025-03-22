@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Expense Tracker Dashboard</h1>
+      <!-- Month Selector -->
+      <label for="dashboardMonth">Select Month:</label>
+      <input type="month" id="dashboardMonth" required />
+      <button onclick="updateDashboard()">Get Dashboard Summary</button>
+
+      <!-- Income vs Expenses Chart -->
+      <canvas id="incomeExpenseChart"></canvas>
+
+      <!-- Expense Breakdown Pie Chart -->
+      <canvas id="expenseCategoryChart"></canvas>
+      <!-- Income vs Expenses Bar Chart -->
+      <canvas id="incomeExpenseChart"></canvas>
+
+      <!-- Expense Breakdown Pie Chart -->
+      <canvas id="expenseCategoryChart"></canvas>
+
+      <!-- Back to Tracker Button -->
+      <button onclick="window.location.href='expenses.html'">
+        Back to Tracker
+      </button>
+    </div>
+
+    <script src="dashboard.js"></script>
+  </body>
+</html>

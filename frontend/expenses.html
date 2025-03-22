@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Expense Tracker</h1>
+
+        <!-- Add/Update Income -->
+        <section id="incomeSection">
+            <h2>Manage Income</h2>
+            <form id="incomeForm">
+                <label for="incomeAmount">Amount:</label>
+                <input type="number" id="incomeAmount" required>
+
+                <label for="incomeMonth">Month:</label>
+                <input type="month" id="incomeMonth" required>
+
+                <button type="submit">Add/Update Income</button>
+            </form>
+            <!-- View and Manage Income -->
+        <section id="viewIncomeSection">
+        <h2>Your Income Records</h2>
+        <ul id="incomeList"></ul>  <!-- Income will be dynamically added here -->
+</section>
+
+        </section>
+        <label for="category">Category:</label>
+        <select id="category" required>
+            <option value="">Select a category</option>
+        </select>
+        <button type="button" id="addCategoryBtn">+ Add Category</button>
+        
+        <!-- Category Input Field (Initially Hidden) -->
+        <div id="addCategorySection" style="display: none;">
+            <input type="text" id="newCategory" placeholder="Enter category name">
+            <button type="button" id="saveCategoryBtn">Save</button>
+        </div>
+        
+        <!-- Add Expense -->
+        <section id="expenseSection">
+            <h2>Manage Expenses</h2>
+            <form id="expenseForm">
+                <label for="category">Category:</label>
+                <input type="text" id="category" required>
+
+                <label for="amount">Amount:</label>
+                <input type="number" id="amount" required>
+
+                <label for="date">Date:</label>
+                <input type="date" id="date" required>
+
+
+                <button type="submit">Add Expense</button>
+            </form>
+            <!-- View and Manage Expenses -->
+<section id="viewExpenseSection">
+    <h2>Your Expense Records</h2>
+    <ul id="expenseList"></ul>  <!-- Expenses will be added dynamically here -->
+</section>
+
+        </section>
+
+        <!-- Monthly Summary -->
+        <section id="summarySection">
+            <h2>Monthly Summary</h2>
+            <form id="summaryForm">
+                <label for="summaryMonth">Select Month:</label>
+                <input type="month" id="summaryMonth" required>
+                <button type="submit">Get Summary</button>
+            </form>
+            <div id="summary">
+                <h3>Summary for <span id="summaryMonthDisplay">-</span></h3>
+                <p><strong>Total Income:</strong> ₹<span id="totalIncome">0</span></p>
+                <p><strong>Total Expenses:</strong> ₹<span id="totalExpenses">0</span></p>
+                <p><strong>Balance:</strong> ₹<span id="balance">0</span></p>
+            </div>
+        </section>
+        <div class="button-container">
+            <button id="logoutBtn">Logout</button>
+            <button onclick="window.location.href='dashboard.html'" id="dashboardBtn">View Dashboard</button>
+        </div>
+        
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
