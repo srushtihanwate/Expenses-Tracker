@@ -9,7 +9,7 @@ if (!token) {
 // Function to Fetch and Update Dashboard Data Based on Selected Month
 async function updateDashboard() {
     const selectedMonth = document.getElementById("dashboardMonth").value;
-    console.log("📅 Selected Month:", selectedMonth);  //  Log selected month
+    console.log("Selected Month:", selectedMonth);  //  Log selected month
 
     if (!selectedMonth) {
         alert("Please select a month!");
@@ -24,7 +24,7 @@ async function updateDashboard() {
         console.log("🔹 Fetching Summary API:", response.url);  //  Log API request URL
 
         const data = await response.json();
-        console.log("📊 Summary API Response:", data);  //  Log API response
+        console.log(" Summary API Response:", data);  //  Log API response
 
         if (response.ok) {
             createIncomeExpenseChart(data.total_income, data.total_expenses);
@@ -33,16 +33,17 @@ async function updateDashboard() {
             alert("Failed to fetch summary.");
         }
     } catch (error) {
-        console.error("❌ Error fetching dashboard data:", error);
+        console.error(" Error fetching dashboard data:", error);
     }
 }
 
-// ✅ Function to group expenses by category
+//  Function to group expenses by category
+// Fix Pie Chart Data Processing
 function groupExpensesByCategory(expenses) {
     const categoryTotals = {};
-    
+
     expenses.forEach(expense => {
-        const category = expense.category_name || "Unknown"; // Ensure category name exists
+        const category = expense.category_name || "Unknown";  // ✅ Fix here
         categoryTotals[category] = (categoryTotals[category] || 0) + parseFloat(expense.amount);
     });
 
@@ -71,17 +72,17 @@ async function fetchCategoryData(selectedMonth) {
 
 //fettchh  ccattegory data
 async function fetchCategoryData(selectedMonth) {
-    console.log("📊 Fetching Expenses for Month:", selectedMonth);  // ✅ Log selected month
+    console.log(" Fetching Expenses for Month:", selectedMonth);  //  Log selected month
 
     try {
         const response = await fetch(`${apiBaseUrl}/expenses/?month=${selectedMonth}`, {
             headers: { "Authorization": `Bearer ${token}` }
         });
 
-        console.log("🔹 Fetching Expenses API:", response.url);  // ✅ Log API request URL
+        console.log("🔹 Fetching Expenses API:", response.url);  //  Log API request URL
 
         const expenses = await response.json();
-        console.log("📊 Expenses API Response:", expenses);  // ✅ Log API response
+        console.log("Expenses API Response:", expenses);  //  Log API response
 
         if (response.ok) {
             const categoryData = groupExpensesByCategory(expenses);
@@ -90,7 +91,7 @@ async function fetchCategoryData(selectedMonth) {
             alert("Failed to fetch expense categories.");
         }
     } catch (error) {
-        console.error("❌ Error fetching expenses:", error);
+        console.error("Error fetching expenses:", error);
     }
 }
 
@@ -98,7 +99,7 @@ async function fetchCategoryData(selectedMonth) {
 let incomeExpenseChartInstance = null;
 let expenseCategoryChartInstance = null;
 
-// ✅ Create Income vs Expense Chart (Bar Chart)
+//  Create Income vs Expense Chart (Bar Chart)
 function createIncomeExpenseChart(income, expenses) {
     const ctx = document.getElementById("incomeExpenseChart").getContext("2d");
 
@@ -122,7 +123,7 @@ function createIncomeExpenseChart(income, expenses) {
     });
 }
 
-// ✅ Create Expense Breakdown Chart (Pie Chart)
+//  Create Expense Breakdown Chart (Pie Chart)
 function createExpenseCategoryChart(categoryData) {
     const ctx = document.getElementById("expenseCategoryChart").getContext("2d");
 
