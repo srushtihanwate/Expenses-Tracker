@@ -39,9 +39,12 @@ class IncomeSerializer(serializers.ModelSerializer):
 #         fields = ['id', 'category', 'amount', 'date', 'user']
 #         extra_kwargs = {'user': {'read_only': True}}  # Make user field read-only
 class ExpenseSerializer(serializers.ModelSerializer):
-    category_name = serializers.ReadOnlyField(source='category.name')  # ✅ Fetch category name
+    category_name = serializers.SerializerMethodField()  # ✅ Add this line
 
     class Meta:
         model = Expense
         fields = ['id', 'category','category_name', 'amount', 'date', 'user']
         extra_kwargs = {'user': {'read_only': True}}  # Prevents user field issues
+        
+    def get_category_name(self, obj):
+        return obj.category.name if obj.category else None 

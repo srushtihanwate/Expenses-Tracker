@@ -183,7 +183,7 @@ class ExpenseListCreateView(generics.ListCreateAPIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self):
-        return Expense.objects.filter(user=self.request.user)
+        return Expense.objects.filter(user=self.request.user).select_related("category")
 
     def perform_create(self, serializer):
         serializer.save(user = self.request.user)
