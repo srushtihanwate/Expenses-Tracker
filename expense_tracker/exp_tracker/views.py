@@ -122,19 +122,19 @@ def monthly_summary(request):
 
     # Get the user's income and expenses for the month
     user = request.user
-    income = Income.objects.filter(user=user, month__year=month_date.year, month__month=month_date.month).aggregate(total_income=Sum('amount'))['total_income'] or 0
-    expenses = Expense.objects.filter(user=user, date__year=month_date.year, date__month=month_date.month).aggregate(total_expenses=Sum('amount'))['total_expenses'] or 0
+    total_income = Income.objects.filter(user=user, month__year=month_date.year, month__month=month_date.month).aggregate(Sum('amount'))['amount__sum'] or 0
+    total_expenses = Expense.objects.filter(user=user, date__year=month_date.year, date__month=month_date.month).aggregate(Sum('amount'))['amount__sum'] or 0
 
-    # Calculate the remaining balance
-    balance = income - expenses
+    # 🔹 FIX: Keep income unchanged, calculate balance instead
+    balance = total_income - total_expenses  # ✅ Correct logic
 
-    # Return the summary
     return Response({
         "month": month_date.strftime("%B %Y"),
-        "total_income": income,
-        "total_expenses": expenses,
+        "total_income": total_income,  # ✅ Show original income
+        "total_expenses": total_expenses,
         "balance": balance
     })
+
 
 # Category Views
 class CategoryListCreateView(generics.ListCreateAPIView):
@@ -186,7 +186,7 @@ class ExpenseListCreateView(generics.ListCreateAPIView):
         return Expense.objects.filter(user=self.request.user)
 
     def perform_create(self, serializer):
-        serializer.save(user = self.request.user)
+        user = self.request.user
         expense_amount = serializer.validated_data['amount']
         expense_date = serializer.validated_data.get('date')
 
@@ -196,23 +196,20 @@ class ExpenseListCreateView(generics.ListCreateAPIView):
 
         try:
             income = Income.objects.get(
-                user=User,
+                user=user,
                 month__year=expense_year,
                 month__month=expense_month
             )
         except Income.DoesNotExist:
             raise ValidationError(f"No income set for {expense_date.strftime('%B %Y')}. Please add income first.")
 
-        # Check if expense exceeds income
-        if income.amount < expense_amount:
+        # ✅ FIX: Don't modify income, just validate if expense exceeds it
+        if expense_amount > income.amount:
             raise ValidationError(f"Expense exceeds available income for {expense_date.strftime('%B')}. You have ₹{income.amount} left.")
 
-        # Deduct expense from income
-        income.amount -= expense_amount
-        income.save()
+        # Save the expense **without modifying the income**
+        serializer.save(user=user)
 
-        # Save the expense
-        serializer.save(user=User)
 
 from django.utils.dateparse import parse_date
 
