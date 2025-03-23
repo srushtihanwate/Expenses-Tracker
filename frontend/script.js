@@ -139,73 +139,73 @@ async function fetchIncome() {
     }
 }
 
-async function fetchCategories() {
-    try {
-        const response = await fetch(`${apiBaseUrl}/categories/`, {
-            headers: {
-                "Authorization": `Bearer ${token}`
-            }
-        });
+// async function fetchCategories() {
+//     try {
+//         const response = await fetch(`${apiBaseUrl}/categories/`, {
+//             headers: {
+//                 "Authorization": `Bearer ${token}`
+//             }
+//         });
 
-        const data = await response.json();
-        const categoryDropdown = document.getElementById("category");
+//         const data = await response.json();
+//         const categoryDropdown = document.getElementById("category");
 
-        categoryDropdown.innerHTML = '<option value="">Select a category</option>'; // Reset dropdown
+//         categoryDropdown.innerHTML = '<option value="">Select a category</option>'; // Reset dropdown
 
-        data.forEach(category => {
-            const option = document.createElement("option");
-            option.value = category.id;
-            option.textContent = category.name;
-            categoryDropdown.appendChild(option);
-        });
+//         data.forEach(category => {
+//             const option = document.createElement("option");
+//             option.value = category.id;
+//             option.textContent = category.name;
+//             categoryDropdown.appendChild(option);
+//         });
 
-    } catch (error) {
-        console.error("Error fetching categories:", error);
-    }
-}
+//     } catch (error) {
+//         console.error("Error fetching categories:", error);
+//     }
+// }
 
-// Call function when the page loads
-fetchCategories();
-document.getElementById("addCategoryBtn").addEventListener("click", () => {
-    document.getElementById("addCategorySection").style.display = "block";  // Show input field
-});
+// // Call function when the page loads
+// fetchCategories();
+// document.getElementById("addCategoryBtn").addEventListener("click", () => {
+//     document.getElementById("addCategorySection").style.display = "block";  // Show input field
+// });
 
-document.getElementById("saveCategoryBtn").addEventListener("click", async () => {
-    const newCategoryInput = document.getElementById("newCategory");
-    const categoryName = newCategoryInput.value.trim();
+// document.getElementById("saveCategoryBtn").addEventListener("click", async () => {
+//     const newCategoryInput = document.getElementById("newCategory");
+//     const categoryName = newCategoryInput.value.trim();
 
-    if (categoryName === "") {
-        alert("Category name cannot be empty.");
-        return;
-    }
+//     if (categoryName === "") {
+//         alert("Category name cannot be empty.");
+//         return;
+//     }
 
-    try {
-        const response = await fetch(`${apiBaseUrl}/categories/`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${token}`
-            },
-            body: JSON.stringify({ name: categoryName })
-        });
+//     try {
+//         const response = await fetch(`${apiBaseUrl}/categories/`, {
+//             method: "POST",
+//             headers: {
+//                 "Content-Type": "application/json",
+//                 "Authorization": `Bearer ${token}`
+//             },
+//             body: JSON.stringify({ name: categoryName })
+//         });
 
-        const data = await response.json();
+//         const data = await response.json();
 
-        if (response.ok) {
-            alert("Category added successfully! ");
+//         if (response.ok) {
+//             alert("Category added successfully! ");
 
-            // Clear input field
-            newCategoryInput.value = "";
+//             // Clear input field
+//             newCategoryInput.value = "";
 
-            // Refresh category dropdown
-            fetchCategories();
-        } else {
-            alert(`Failed to add category: ${JSON.stringify(data)}`);
-        }
-    } catch (error) {
-        console.error("Error adding category:", error);
-    }
-});
+//             // Refresh category dropdown
+//             fetchCategories();
+//         } else {
+//             alert(`Failed to add category: ${JSON.stringify(data)}`);
+//         }
+//     } catch (error) {
+//         console.error("Error adding category:", error);
+//     }
+// });
 
 
 // Add Expense with Success Alert
@@ -256,7 +256,7 @@ async function fetchExpenses() {
                     const listItem = document.createElement("li");
                     //const categoryName = expense.category_name || "Unknown"; 
                     listItem.innerHTML = `
-                        ₹${expense.amount} - ${expense.category}  ${expense.categoryname} (${expense.date})  
+                        ₹${expense.amount} - ${expense.category}   (${expense.date})  
                         <button onclick="editExpense(${expense.id}, '${expense.category}', ${expense.amount}, '${expense.date}')">Edit</button>
                         <button onclick="deleteExpense(${expense.id})">Delete</button>
                     `;
